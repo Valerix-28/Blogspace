@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BlogSpace | Stories & Ideas</title>
+<style>
+:root{--bg:#f6f7fb;--card:#fff;--text:#182230;--muted:#657184;--accent:#6c4cf1;--line:#e5e8ef;--dark:#17152b}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+header{background:var(--dark);color:#fff;padding:18px 7%;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.logo{font-size:1.45rem;font-weight:800;letter-spacing:.3px}.logo span{color:#a99aff}
+nav{display:flex;gap:20px;flex-wrap:wrap}nav a{color:#e9e7ff;text-decoration:none;font-size:.95rem}nav a:hover{color:#b8adff}
+.hero{padding:62px 7% 54px;background:linear-gradient(120deg,#211b48,#5140a5);color:white}
+.hero-inner{max-width:1100px;margin:auto}.eyebrow{text-transform:uppercase;letter-spacing:2px;font-size:.76rem;color:#c7bdff;font-weight:bold}
+.hero h1{font-size:clamp(2.1rem,5vw,3.6rem);line-height:1.1;margin:12px 0;max-width:700px}.hero p{max-width:620px;color:#e0dcff;font-size:1.05rem}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
+button,.btn{border:0;border-radius:9px;padding:11px 16px;font-weight:bold;cursor:pointer;font-size:.92rem;text-decoration:none;display:inline-block}
+.primary{background:var(--accent);color:white}.light{background:white;color:#282044}.outline{background:transparent;border:1px solid #b9b0ff;color:white}
+.container{max-width:1100px;margin:34px auto;padding:0 22px}
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap;margin-bottom:18px}
+h2{margin:0;font-size:1.8rem}.muted{color:var(--muted)}.search{padding:12px 14px;border:1px solid var(--line);border-radius:9px;min-width:220px;font-size:1rem}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 22px}.filter{background:#e9e7f9;color:#5140a5}.filter.active{background:var(--accent);color:white}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.blog-card{background:var(--card);border:1px solid var(--line);border-radius:15px;overflow:hidden;box-shadow:0 5px 18px #202a4410;display:flex;flex-direction:column}
+.cover{height:150px;display:flex;align-items:center;justify-content:center;font-size:3rem;background:linear-gradient(135deg,#e7e2ff,#c8e9ff)}
+.blog-body{padding:20px;display:flex;flex-direction:column;flex:1}.tag{font-size:.75rem;text-transform:uppercase;letter-spacing:1px;color:var(--accent);font-weight:bold}
+.blog-body h3{margin:7px 0 8px;line-height:1.3;font-size:1.2rem}.blog-body p{color:var(--muted);margin:0 0 15px}.meta{font-size:.82rem;color:#7c8797;margin-top:auto;padding-top:12px}.read{margin-top:14px;align-self:flex-start;background:#eeeaff;color:#5140a5}
+.empty{padding:35px;text-align:center;background:white;border-radius:12px;color:var(--muted);grid-column:1/-1}
+.editor{background:white;border:1px solid var(--line);border-radius:15px;padding:24px;margin-top:45px;box-shadow:0 5px 18px #202a440a}
+.editor h2{margin-bottom:5px}.editor-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:18px}
+.field{display:flex;flex-direction:column;gap:6px}.field.full{grid-column:1/-1}label{font-weight:bold;font-size:.9rem}
+input,textarea,select{font:inherit;padding:11px 12px;border:1px solid #d8dce6;border-radius:8px;background:#fff;width:100%}textarea{min-height:110px;resize:vertical}
+.editor-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}.secondary{background:#eceef4;color:#293244}.danger{background:#ffe9e9;color:#a62a2a}
+.manage-list{margin-top:22px;border-top:1px solid var(--line);padding-top:16px}.manage-item{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}.manage-item span{font-weight:bold}.manage-actions{display:flex;gap:8px;flex-wrap:wrap}
+footer{margin-top:50px;background:#17152b;color:#d9d5f4;padding:28px 7%;text-align:center}footer p{margin:4px}
+dialog{border:0;border-radius:14px;padding:0;width:min(700px,92vw);box-shadow:0 20px 80px #0005}dialog::backdrop{background:#101020aa}.modal-content{padding:26px}.modal-content h2{margin:8px 0}.modal-content p{white-space:pre-wrap}.close{float:right;background:#eceef4;color:#222}
+.notice{background:#f0edff;border-left:4px solid var(--accent);padding:12px 14px;border-radius:6px;color:#42357f;font-size:.9rem;margin-top:14px}
+@media(max-width:850px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){header{padding:16px 5%}.hero{padding:44px 5%}.container{padding:0 15px}.grid{grid-template-columns:1fr}.editor-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.search{width:100%}}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">Blog<span>Space.</span></div>
+  <nav><a href="#home">Home</a><a href="#blogs">Blogs</a><a href="#editor">Manage Blogs</a></nav>
+</header>
+<section class="hero" id="home">
+  <div class="hero-inner">
+    <div class="eyebrow">A little space for big ideas</div>
+    <h1>Stories that inspire.<br>Ideas that stay.</h1>
+    <p>Explore simple thoughts about technology, travel, student life, healthy habits and creativity. Read a story, discover something new, or publish your own post.</p>
+    <div class="hero-actions"><a class="btn light" href="#blogs">Explore Blogs ↓</a><a class="btn outline" href="#editor">Create a Blog +</a></div>
+  </div>
+</section>
+<main class="container" id="blogs">
+  <div class="section-head"><div><h2>Latest stories</h2><div class="muted">Five starter posts — you can edit every one.</div></div><input id="search" class="search" type="search" placeholder="Search blog posts..." aria-label="Search blog posts"></div>
+  <div class="filters" id="filters">
+    <button class="filter active" data-category="All">All topics</button><button class="filter" data-category="Technology">Technology</button><button class="filter" data-category="Travel">Travel</button><button class="filter" data-category="Student Life">Student Life</button><button class="filter" data-category="Lifestyle">Lifestyle</button><button class="filter" data-category="Creativity">Creativity</button>
+  </div>
+  <div class="grid" id="blogGrid"></div>
+
+  <section class="editor" id="editor">
+    <h2>Blog manager</h2><p class="muted">Edit a post, add a new one, or remove a post. Changes are saved in this browser on this device.</p>
+    <div class="notice">Web development project features: HTML structure, CSS styling, JavaScript DOM manipulation, search, category filters, and browser localStorage.</div>
+    <form id="blogForm">
+      <input type="hidden" id="postId">
+      <div class="editor-grid">
+        <div class="field"><label for="title">Blog title</label><input id="title" required maxlength="90" placeholder="Enter an interesting title"></div>
+        <div class="field"><label for="category">Category</label><select id="category"><option>Technology</option><option>Travel</option><option>Student Life</option><option>Lifestyle</option><option>Creativity</option></select></div>
+        <div class="field"><label for="author">Author</label><input id="author" required maxlength="40" value="BlogSpace Team"></div>
+        <div class="field"><label for="emoji">Cover emoji</label><input id="emoji" maxlength="8" value="✍️" placeholder="e.g. 💻"></div>
+        <div class="field full"><label for="summary">Short summary</label><textarea id="summary" required maxlength="240" rows="3" placeholder="A short preview shown on the blog card"></textarea></div>
+        <div class="field full"><label for="content">Full blog content</label><textarea id="content" required rows="6" placeholder="Write the full blog here..."></textarea></div>
+      </div>
+      <div class="editor-actions"><button class="primary" type="submit" id="saveButton">Publish blog</button><button class="secondary" type="button" id="resetButton">Clear form</button></div>
+    </form>
+    <div class="manage-list"><h3>Manage published posts</h3><div id="manageList"></div></div>
+  </section>
+</main>
+<footer><p><strong>BlogSpace.</strong> — Share what you learn. Learn what others share.</p><p>Made as a Web Development project using HTML, CSS and JavaScript.</p></footer>
+<dialog id="reader"><div class="modal-content"><button class="close" id="closeReader">Close ✕</button><div class="tag" id="readerCategory"></div><h2 id="readerTitle"></h2><div class="meta" id="readerMeta"></div><p id="readerContent"></p></div></dialog>
+<script>
+const starterPosts = [
+{id:1,title:"How Technology Is Changing Our Daily Lives",category:"Technology",author:"BlogSpace Team",emoji:"💻",summary:"From online learning to digital payments, technology has made many everyday tasks faster and easier.",content:"Technology has become an important part of everyday life. We use smartphones to communicate, computers to study, and digital services to pay bills or shop online. Technology also helps doctors, teachers and businesses work more efficiently.\\n\\nHowever, we should use it wisely. Too much screen time can affect sleep and concentration, while sharing personal information online can create privacy risks.\\n\\nThe best approach is balance: use technology to learn, solve problems and stay connected, while making time for real-world experiences."},
+{id:2,title:"A Journey to the Mountains",category:"Travel",author:"Aarav Patel",emoji:"🏔️",summary:"Mountain travel offers fresh air, beautiful views and a chance to slow down and reconnect with nature.",content:"The mountains have a special kind of peace. The fresh air, quiet trails and wide views help us step away from our busy routines. A trip does not need to be expensive or far away to be meaningful.\\n\\nBefore travelling, check the weather, carry enough water, wear suitable shoes and tell someone your route. Respect local communities and take your waste back with you.\\n\\nTravel is not only about reaching a destination. It is also about the people we meet, the lessons we learn and the memories we bring home."},
+{id:3,title:"How to Make Student Life More Productive",category:"Student Life",author:"BlogSpace Team",emoji:"📚",summary:"Small study habits, realistic goals and short breaks can make college life easier to manage.",content:"Student life can feel busy because classes, assignments, exams and personal responsibilities all compete for attention. A simple plan can make the day less stressful.\\n\\nWrite down the three most important tasks for the day. Study in focused sessions, keep your phone away when possible, and take short breaks. Try to revise a little every day instead of waiting until the night before an exam.\\n\\nProductivity does not mean studying every minute. Sleep, food, exercise and time with friends also help you learn and feel better."},
+{id:4,title:"Simple Habits for a Healthier Lifestyle",category:"Lifestyle",author:"Meera Shah",emoji:"🌱",summary:"You do not need a perfect routine. Start with small habits you can repeat consistently.",content:"A healthier lifestyle often begins with simple choices. Drink water regularly, include a variety of nutritious foods in your meals, move your body every day and keep a consistent sleep schedule.\\n\\nChoose goals that fit your life. For example, take a short walk after class or prepare your bag the night before. Small habits are easier to maintain than dramatic changes that feel impossible after a few days.\\n\\nRemember that progress is not always perfect. If you miss a day, begin again the next day and keep going."},
+{id:5,title:"Why Creativity Matters in the Digital Age",category:"Creativity",author:"Riya Desai",emoji:"🎨",summary:"Creativity helps us communicate ideas, solve problems and look at familiar things in a new way.",content:"Creativity is not limited to painting or music. It can appear in a website layout, a new business idea, a presentation or a different way of solving a problem.\\n\\nDigital tools give people many ways to express themselves, from writing blogs and editing videos to designing apps. But creativity grows through practice, curiosity and learning from feedback.\\n\\nTry making something small each week. It could be a poster, a short article or a simple web page. The goal is not perfection; it is to keep exploring and improving."}
+];
+let posts = loadPosts();
+let activeCategory = "All";
+function loadPosts(){try{const saved=localStorage.getItem("blogspace_posts");return saved?JSON.parse(saved):starterPosts.map(p=>({...p}));}catch(e){return starterPosts.map(p=>({...p}));}}
+function savePosts(){localStorage.setItem("blogspace_posts",JSON.stringify(posts));}
+function escapeHTML(value){return String(value).replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));}
+function render(){
+ const query=document.getElementById("search").value.trim().toLowerCase();
+ const visible=posts.filter(p=>(activeCategory==="All"||p.category===activeCategory)&&`${p.title} ${p.summary} ${p.category} ${p.author}`.toLowerCase().includes(query));
+ const grid=document.getElementById("blogGrid");
+ grid.innerHTML=visible.length?visible.map(p=>`<article class="blog-card"><div class="cover" aria-hidden="true">${escapeHTML(p.emoji||"✍️")}</div><div class="blog-body"><div class="tag">${escapeHTML(p.category)}</div><h3>${escapeHTML(p.title)}</h3><p>${escapeHTML(p.summary)}</p><div class="meta">By ${escapeHTML(p.author)}</div><button class="read" onclick="readPost(${p.id})">Read article →</button></div></article>`).join(""):`<div class="empty">No blog posts found. Try another search or category.</div>`;
+ document.getElementById("manageList").innerHTML=posts.length?posts.map(p=>`<div class="manage-item"><span>${escapeHTML(p.title)}</span><div class="manage-actions"><button class="secondary" onclick="editPost(${p.id})">Edit</button><button class="danger" onclick="deletePost(${p.id})">Delete</button></div></div>`).join(""):`<p class="muted">No posts yet. Use the form above to publish one.</p>`;
+}
+function readPost(id){const p=posts.find(x=>x.id===id);if(!p)return;document.getElementById("readerCategory").textContent=p.category;document.getElementById("readerTitle").textContent=p.title;document.getElementById("readerMeta").textContent="By "+p.author;document.getElementById("readerContent").textContent=p.content;document.getElementById("reader").showModal();}
+function editPost(id){const p=posts.find(x=>x.id===id);if(!p)return;document.getElementById("postId").value=p.id;document.getElementById("title").value=p.title;document.getElementById("category").value=p.category;document.getElementById("author").value=p.author;document.getElementById("emoji").value=p.emoji;document.getElementById("summary").value=p.summary;document.getElementById("content").value=p.content;document.getElementById("saveButton").textContent="Save changes";document.getElementById("editor").scrollIntoView({behavior:"smooth"});}
+function deletePost(id){const p=posts.find(x=>x.id===id);if(!p||!confirm(`Delete "${p.title}"?`))return;posts=posts.filter(x=>x.id!==id);savePosts();render();if(document.getElementById("postId").value==id)resetForm();}
+function resetForm(){document.getElementById("blogForm").reset();document.getElementById("postId").value="";document.getElementById("author").value="BlogSpace Team";document.getElementById("emoji").value="✍️";document.getElementById("saveButton").textContent="Publish blog";}
+document.getElementById("blogForm").addEventListener("submit",e=>{e.preventDefault();const existingId=document.getElementById("postId").value;const post={id:existingId?Number(existingId):Date.now(),title:document.getElementById("title").value.trim(),category:document.getElementById("category").value,author:document.getElementById("author").value.trim(),emoji:document.getElementById("emoji").value.trim()||"✍️",summary:document.getElementById("summary").value.trim(),content:document.getElementById("content").value.trim()};if(existingId){posts=posts.map(p=>p.id===Number(existingId)?post:p);}else{posts.unshift(post);}savePosts();render();resetForm();document.getElementById("blogs").scrollIntoView({behavior:"smooth"});});
+document.getElementById("resetButton").addEventListener("click",resetForm);
+document.getElementById("search").addEventListener("input",render);
+document.getElementById("filters").addEventListener("click",e=>{const btn=e.target.closest("button[data-category]");if(!btn)return;activeCategory=btn.dataset.category;document.querySelectorAll(".filter").forEach(b=>b.classList.toggle("active",b===btn));render();});
+document.getElementById("closeReader").addEventListener("click",()=>document.getElementById("reader").close());
+render();
+</script>
+</body>
+</html>
